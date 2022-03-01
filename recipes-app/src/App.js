@@ -8,13 +8,13 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <ul>
+        {/* <ul>
           <li><Link to="/">Go to home page</Link></li>
           <li><Link to="/about">Go to about page</Link></li>
           <li><Link to="/recipes">Go to recipes page</Link></li>
           <li><Link to="/recipes/add">Go to Add new recipes page</Link></li>
           <li><Link to="/recipes/edit">Go to Edit recipes page</Link></li>
-        </ul>
+        </ul> */}
 
         <Routes>
           <Route path="/" element={<Home />} />
