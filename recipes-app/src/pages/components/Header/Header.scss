@@ -7,8 +7,6 @@ body {
     align-items: center;
     flex-flow: row wrap;
     background-color: white;
-    position: fixed;
-    top: 0;
     height: 5rem;
     font-family: Poppins;
     box-shadow: 0px 0px 3px 0px #888888;
@@ -22,23 +20,23 @@ body {
       &:hover {
         color: orange;
       }
+    }
 
-      &__title {
-        font-family: "Dancing Script", cursive;
-        font-size: 3rem;
-        a {
-          text-decoration: none;
-          color: orange;
-        }
-      }
-
-      &__login {
+    &__title {
+      font-family: "Dancing Script", cursive;
+      font-size: 3rem;
+      a {
+        text-decoration: none;
         color: orange;
-        border-color: orange;
-        &:hover {
-          background-color: orange;
-          border-color: white;
-        }
+      }
+    }
+
+    &__login {
+      color: orange;
+      border-color: orange;
+      &:hover {
+        background-color: orange;
+        border-color: white;
       }
     }
   }

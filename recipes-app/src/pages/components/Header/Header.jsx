@@ -8,7 +8,7 @@ export default function Header() {
         <header className="header fixed-top">
             <Container fluid>
                 <Row className="justify-content-around align-items-center">
-                    <Col xs="auto" className="header__title">
+                    <Col xs="auto" className="header__title" >
                         <a href="/">Maxim</a>
                     </Col>
                     <Col xs="auto">

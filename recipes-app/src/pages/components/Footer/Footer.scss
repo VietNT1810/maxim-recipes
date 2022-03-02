@@ -1,0 +1,14 @@
+.footer {
+  background-color: rgb(211, 137, 0);
+  line-height: 3rem;
+  font-family: Poppins;
+
+  span {
+    color: white;
+  }
+
+  &__icon {
+    color: white;
+    padding-right: 10px;
+  }
+}
