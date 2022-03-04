@@ -46,7 +46,7 @@ export default function RecipeDetail() {
                     <span>SERVES: {recipes.serves}</span>
                   </div>
                   <div className="time">
-                    <span>COOKS IN: {recipes.time}</span>
+                    <span>COOKS IN: {recipes.times}</span>
                   </div>
                   <div className="difficulty">
                     <span>DIFFICULTY: {recipes.difficulty}</span>

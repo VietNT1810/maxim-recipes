@@ -1,9 +1,6 @@
 import React from 'react'
-import { Col, Row } from 'react-bootstrap'
-import { Link, Route, Routes } from 'react-router-dom'
 import Footer from '../components/Footer/Footer'
 import Header from '../components/Header/Header'
-import AddEdit from './AddEdit/AddEdit'
 import RecipesCard from './components/RecipesCard'
 
 export default function Recipes() {

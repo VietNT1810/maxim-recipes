@@ -1,5 +1,9 @@
 body {
-  padding-top: 5rem;
+  // padding-top: 5rem;
+  .stick {
+    width: 100%;
+    height: 5rem;
+  }
 
   .header {
     display: flex;

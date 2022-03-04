@@ -4,8 +4,10 @@ import Home from './pages/Home/Home';
 import About from './pages/About/About';
 import Recipes from './pages/Recipes/index';
 import RecipeDetail from './pages/Recipes/RecipeDetail/RecipeDetail';
-import Admin from './pages/Users/Admin/Admin';
-import Login from './pages/Login/Login';
+import Dashboard from './pages/Dashboard/Main/Dashboard'
+import AddEdit from './pages/Dashboard/AddEdit/AddEdit';
+import Users from './pages/Dashboard/Users/Users';
+import Products from './pages/Dashboard/Products/Products';
 
 function App() {
   return (
@@ -17,8 +19,11 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/recipes/detail/:recipeID" element={<RecipeDetail />} />
           <Route path="/recipes/detail" element={<RecipeDetail />} />
-          <Route path="/admin" element={<Admin />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/dashboard/add" element={<AddEdit />} />
+          <Route path="/dashboard/edit/:recipeID" element={<AddEdit />} />
+          <Route path="/dashboard/users" element={<Users />} />
+          <Route path="/dashboard/products" element={<Products />} />
         </Routes>
       </BrowserRouter>
     </div>
