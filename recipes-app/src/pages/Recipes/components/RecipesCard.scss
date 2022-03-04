@@ -1,0 +1,24 @@
+.recipes {
+  &__card {
+    text-decoration: none;
+  }
+
+  &__time {
+    padding-bottom: 10px;
+    span {
+      color: rgb(160, 104, 1);
+      font-family: Poppins;
+      font-size: 14px;
+
+      .bi {
+        width: 14px;
+        color: black;
+      }
+    }
+  }
+
+  &__title {
+    color: black;
+    font-family: Poppins;
+  }
+}
