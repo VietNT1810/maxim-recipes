@@ -28,8 +28,10 @@ export default function AddEdit() {
         }).then((result) => {
             if (result.isConfirmed) {
                 axios.delete(`https://maxim-db.herokuapp.com/recipes/${id}`)
-                    .then(() => { console.log("Delete successful") })
-                setUpdate(value => value + 1);
+                    .then(() => {
+                        console.log("Delete successful")
+                        setUpdate(value => value + 1);
+                    })
                 Swal.fire(
                     'Deleted!',
                     'Your recipe has been deleted.',
