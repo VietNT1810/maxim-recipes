@@ -1,0 +1,27 @@
+.about {
+  &__image {
+    height: 35rem;
+    background-image: url("../../assets/images/chef.jpg");
+    background-size: cover;
+    background-position: 50% -180px;
+  }
+
+  &__section {
+    text-align: center;
+
+    h2 {
+      margin-top: 2rem;
+    }
+
+    hr {
+      width: 20%;
+      margin: 0 auto;
+    }
+  }
+
+  &__content {
+    h3 {
+      margin: 2rem;
+    }
+  }
+}

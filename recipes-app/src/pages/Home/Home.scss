@@ -21,3 +21,45 @@
     bottom: 400px;
   }
 }
+
+.main {
+  font-family: Poppins;
+
+  .title {
+    text-align: center;
+    margin: 2rem;
+  }
+
+  .choice {
+    margin: 2rem;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  .features {
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+      url("../../assets/images/features.jpg");
+    background-size: cover;
+    background-position: 50% -420px;
+    padding: 2rem 10rem 4rem 10rem;
+    text-align: center;
+    color: white;
+
+    .bi {
+      margin-bottom: 1rem;
+    }
+  }
+
+  .recipes {
+    &__button{
+      margin: 2rem;
+      text-align: center;
+
+      :hover {
+        color: white;
+      }
+    }
+  }
+}
