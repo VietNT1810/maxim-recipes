@@ -10,7 +10,7 @@ export default function Login() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get(`http://localhost:3004/users`)
+    axios.get(`https://maxim-db.herokuapp.com/users`)
       .then((res) => { setAccounts(res.data) })
   }, [])
 

@@ -13,7 +13,7 @@ export default function AddEdit() {
 
     useEffect(() => {
         if (recipeID) {
-            axios.get(`http://localhost:3004/recipes/${recipeID}`)
+            axios.get(`https://maxim-db.herokuapp.com/recipes/${recipeID}`)
                 .then((res) => {
                     setForm(res.data)
                 })
@@ -69,9 +69,10 @@ export default function AddEdit() {
 
     const handleSubmit = () => {
         if (create) {
-            axios.post(`http://localhost:3004/recipes`, form)
+            axios.post(`https://maxim-db.herokuapp.com/recipes`, form)
                 .then((res) => {
                     console.log(res);
+                    console.log(create);
                 })
                 .catch((err) => {
                     throw err;
@@ -80,7 +81,7 @@ export default function AddEdit() {
             setForm({});
         } else {
             if (recipeID) {
-                axios.put(`http://localhost:3004/recipes/${recipeID}`, form)
+                axios.put(`https://maxim-db.herokuapp.com/recipes/${recipeID}`, form)
                     .then(function (response) {
                         console.log(response);
                     })

@@ -12,7 +12,7 @@ export default function RecipeDetail() {
   console.log(recipeID);
 
   useEffect(() => {
-    axios.get(`http://localhost:3004/recipes/${recipeID}`)
+    axios.get(`https://maxim-db.herokuapp.com/recipes/${recipeID}`)
       .then((res) => { setRecipes(res.data) })
       .catch((err) => { throw err });
   }, [])

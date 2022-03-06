@@ -6,7 +6,7 @@ import Sidebar from '../Sidebar/Sidebar'
 export default function Users() {
     const [users, setUsers] = useState([]);
     useEffect(() => {
-        axios.get(`http://localhost:3004/users`)
+        axios.get(`https://maxim-db.herokuapp.com/users`)
             .then((res) => { setUsers(res.data) })
             .catch((err) => { throw err });
     }, [])

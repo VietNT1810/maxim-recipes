@@ -9,7 +9,7 @@ export default function RecipesCard() {
     const [cards, setCards] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:3004/recipes')
+        axios.get('https://maxim-db.herokuapp.com/recipes')
             .then((res) => { setCards(res.data) })
             .catch((err) => { throw err });
     }, [])

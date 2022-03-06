@@ -10,7 +10,7 @@ export default function AddEdit() {
     const [update, setUpdate] = useState(0); //Force update
 
     useEffect(() => {
-        axios.get(`http://localhost:3004/recipes`)
+        axios.get(`https://maxim-db.herokuapp.com/recipes`)
             .then((res) => { setCards(res.data) })
             .catch((err) => { throw err });
     }, [update])
@@ -27,7 +27,7 @@ export default function AddEdit() {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                axios.delete(`http://localhost:3004/recipes/${id}`)
+                axios.delete(`https://maxim-db.herokuapp.com/recipes/${id}`)
                     .then(() => { console.log("Delete successful") })
                 setUpdate(value => value + 1);
                 Swal.fire(
