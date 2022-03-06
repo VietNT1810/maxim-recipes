@@ -4,7 +4,7 @@ import './Footer.scss'
 
 export default function Footer() {
     return (
-        <div className="footer fixed-bottom">
+        <div className="footer">
             <Container >
                 <Row className="justify-content-between">
                     <Col xs="auto">

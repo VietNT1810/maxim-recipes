@@ -1,6 +1,6 @@
 import React from 'react'
 import Header from '../components/Header/Header'
-import { Carousel } from "react-bootstrap"
+import { Carousel, Container } from "react-bootstrap"
 import { NavLink } from "react-router-dom"
 import './Home.scss';
 import Footer from '../components/Footer/Footer';
@@ -49,6 +49,12 @@ export default function Home() {
           </Carousel.Caption>
         </Carousel.Item>
       </Carousel>
+
+      <div className="choice-section">
+        <Container>
+          <div className="section__title"></div>
+        </Container>
+      </div>
 
       {/* Footer */}
       <Footer />
