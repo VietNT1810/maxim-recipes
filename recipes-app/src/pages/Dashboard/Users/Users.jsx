@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react'
-import { Col, Container, Row, Table } from 'react-bootstrap'
+import { Button, Col, Container, Row, Table } from 'react-bootstrap'
 import Sidebar from '../Sidebar/Sidebar'
 
 export default function Users() {
@@ -17,7 +17,9 @@ export default function Users() {
                     <Sidebar />
 
                     <Col>
-                        <h1>Users</h1>
+                        <Row>
+                            <Col><h1>Users</h1></Col>
+                        </Row>
                         <div className="users__list">
                             <Table striped bordered hover>
                                 <thead>

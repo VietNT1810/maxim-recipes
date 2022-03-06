@@ -12,7 +12,7 @@ export default function Home() {
       <Header />
 
       {/* Carousel */}
-      <Carousel interval={null} pause={false}>
+      <Carousel interval={2000} pause={false}>
         <Carousel.Item>
           <img
             className="d-block w-100"

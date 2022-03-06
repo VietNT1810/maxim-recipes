@@ -1,5 +1,5 @@
 import logo from './logo.svg';
-import { BrowserRouter, Route, Routes, Link } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home/Home';
 import About from './pages/About/About';
 import Recipes from './pages/Recipes/index';
@@ -8,6 +8,7 @@ import Dashboard from './pages/Dashboard/Main/Dashboard'
 import AddEdit from './pages/Dashboard/AddEdit/AddEdit';
 import Users from './pages/Dashboard/Users/Users';
 import Products from './pages/Dashboard/Products/Products';
+import Login from './pages/components/Login/Login';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/dashboard/edit/:recipeID" element={<AddEdit />} />
           <Route path="/dashboard/users" element={<Users />} />
           <Route path="/dashboard/products" element={<Products />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </BrowserRouter>
     </div>

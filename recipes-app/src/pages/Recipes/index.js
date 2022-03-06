@@ -10,7 +10,7 @@ export default function Recipes() {
 
             <div className="main" style={{ paddingTop: 2 + "rem", marginBottom: 5 + "rem" }}>
                 <div className="container overflow-hidden">
-                    <span>Homemade Recipes</span>
+                    <h1 style={{ marginBottom: 30, textAlign: "center" }}><i>Homemade Recipes</i></h1>
                     <RecipesCard />
                 </div>
             </div>

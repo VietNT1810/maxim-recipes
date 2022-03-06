@@ -3,6 +3,7 @@ import { Formik } from 'formik'
 import React, { useEffect, useState } from 'react'
 import { Button, Col, Container, Form, Row } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
+import Swal from 'sweetalert2'
 import Sidebar from '../Sidebar/Sidebar'
 
 export default function AddEdit() {
@@ -22,40 +23,41 @@ export default function AddEdit() {
 
     const handleValidate = () => {
         const error = {};
-        if (!form.title) {
-            error.title = "Required";
-        }
-
-        if (!form.description) {
-            error.description = "Required";
-        }
-
-        if (!form.serves) {
-            error.serves = 'Required';
-        } else if (isNaN(form.serves)) {
-            error.serves = 'Invalid number';
-        }
 
         if (!form.id) {
-            error.id = 'Required';
+            error.id = 'This field is required';
         } else if (isNaN(form.id)) {
             error.id = 'Invalid number';
         }
 
+        if (!form.title) {
+            error.title = "This field is required";
+        }
+
+        if (!form.description) {
+            error.description = "This field is required";
+        }
+
+        if (!form.serves) {
+            error.serves = 'This field is required';
+        } else if (isNaN(form.serves)) {
+            error.serves = 'Invalid number';
+        }
+
         if (!form.times) {
-            error.times = "Required";
+            error.times = "This field is required";
         }
 
         if (!form.difficulty) {
-            error.difficulty = "Required";
+            error.difficulty = "This field is required";
         }
 
         if (!form.ingredients) {
-            error.ingredients = "Required";
+            error.ingredients = "This field is required";
         }
 
         if (!form.method) {
-            error.method = "Required";
+            error.method = "This field is required";
         }
 
         return error;
@@ -88,6 +90,12 @@ export default function AddEdit() {
                 setForm({});
             }
         }
+        Swal.fire({
+            icon: 'success',
+            title: 'Your work has been saved',
+            showConfirmButton: false,
+            timer: 1500
+        })
     }
 
 
@@ -104,7 +112,7 @@ export default function AddEdit() {
                             validate={handleValidate}
                             onSubmit={handleSubmit}
                         >
-                            {({ values, errors, handleSubmit }) => (
+                            {({ values, errors, touched, handleSubmit }) => (
                                 <Form onSubmit={handleSubmit}>
                                     <Form.Group className="mb-3">
                                         <Form.Label>ID</Form.Label>
