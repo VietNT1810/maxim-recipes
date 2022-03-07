@@ -38,7 +38,7 @@ export default function Header() {
                                 </Dropdown.Toggle>
 
                                 <Dropdown.Menu>
-                                    <Dropdown.Item href="/saved">Saved Recipes</Dropdown.Item>
+                                    <Dropdown.Item><NavLink to="/saved" className="header__save">Saved Recipes</NavLink></Dropdown.Item>
                                     <Dropdown.Item href="/login">Log out</Dropdown.Item>
                                 </Dropdown.Menu>
                             </Dropdown>

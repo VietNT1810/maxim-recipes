@@ -1,0 +1,43 @@
+.recipes {
+  &__detail {
+    .serves {
+      span::before {
+        content: "serves: ";
+        text-transform: uppercase;
+        color: rgb(175, 114, 0);
+      }
+    }
+
+    .time {
+      span::before {
+        content: "cooks in: ";
+        text-transform: uppercase;
+        color: rgb(175, 114, 0);
+      }
+    }
+
+    .difficulty {
+      span::before {
+        content: "difficulty: ";
+        text-transform: uppercase;
+        color: rgb(175, 114, 0);
+      }
+    }
+  }
+
+  &__ingredients,
+  &__method {
+    span {
+      font-size: 2rem;
+    }
+  }
+
+  &__save {
+    .btn-primary {
+      background-color: orange;
+      border: none;
+      margin: 1rem 0;
+    }
+    
+  }
+}

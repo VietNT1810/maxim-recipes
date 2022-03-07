@@ -49,9 +49,14 @@ body {
         color: white;
       }
     }
-    
+
     .btn:hover {
       color: white;
+    }
+
+    &__save {
+      text-decoration: none;
+      color: black;
     }
   }
 }
