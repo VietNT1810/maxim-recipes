@@ -28,7 +28,7 @@ export default function RecipeDetail() {
         dispatch(action);
         resolve(Swal.fire({
           icon: 'success',
-          title: 'Your work has been saved',
+          title: 'Recipe has been saved',
           showConfirmButton: false,
           timer: 1500
         }));

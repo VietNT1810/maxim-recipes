@@ -3,6 +3,7 @@ import { Formik } from "formik";
 import React, { useEffect, useState } from "react";
 import { Button, FloatingLabel, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom"
+import Swal from "sweetalert2";
 
 export default function Login() {
   const [accounts, setAccounts] = useState({});
@@ -35,13 +36,19 @@ export default function Login() {
 
   const handleSubmit = (e) => {
     accounts.map((account) => {
-      console.log(account);
       if (form.username === account.username && form.password === account.password) {
         if (account.role === 'admin') {
           navigate("/dashboard")
         } else {
           navigate("/")
         }
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Wrong username or password!',
+          footer: `<a href="#">Don't have an account? Register one!</a>`
+        })
       }
     })
   };

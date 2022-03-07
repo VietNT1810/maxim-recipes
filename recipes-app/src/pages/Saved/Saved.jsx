@@ -31,7 +31,7 @@ export default function Saved() {
             if (result.isConfirmed) {
                 Swal.fire(
                     'Deleted!',
-                    'Your file has been deleted.',
+                    'Your recipe has been deleted.',
                     'success'
                 )
                 dispatch(action);
