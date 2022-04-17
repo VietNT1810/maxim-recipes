@@ -1,7 +1,8 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react'
 import { Button, Col, Container, Row, Table } from 'react-bootstrap'
-import Sidebar from '../Sidebar/Sidebar'
+import { Outlet } from 'react-router-dom';
+import Sidebar from '../../Components/Sidebar/Sidebar'
 
 export default function Users() {
     const [users, setUsers] = useState([]);
@@ -11,11 +12,9 @@ export default function Users() {
             .catch((err) => { throw err });
     }, [])
     return (
-        <div className="dashboard">
+        <div className="dashboard" style={{ marginLeft: 250 }}>
             <Container fluid>
                 <Row className="flex-nowrap">
-                    <Sidebar />
-
                     <Col>
                         <Row>
                             <Col><h1>Users</h1></Col>
@@ -45,6 +44,7 @@ export default function Users() {
                     </Col>
                 </Row>
             </Container>
+            <Outlet />
         </div>
     )
 }

@@ -1,9 +1,10 @@
 import React from 'react'
 import Header from '../components/Header/Header'
 import { Button, Carousel, Col, Container, Row } from "react-bootstrap"
-import { NavLink } from "react-router-dom"
+import { NavLink, Outlet } from "react-router-dom"
 import './Home.scss';
 import Footer from '../components/Footer/Footer';
+import Banner from '../components/Banner';
 
 export default function Home() {
   return (
@@ -12,43 +13,7 @@ export default function Home() {
       <Header />
 
       {/* Carousel */}
-      <Carousel interval={2000} pause={false}>
-        <Carousel.Item>
-          <img
-            className="d-block w-100"
-            src={require('../../assets/images/banner1.jpg')}
-            alt="First slide"
-          />
-          <Carousel.Caption>
-            <h3 className="carousel__label animate__animated animate__bounce"><i>Explore Homemade Recipes</i></h3>
-            <NavLink to='/recipes'><button className="carousel__button">EXPLORE NOW</button></NavLink>
-          </Carousel.Caption>
-        </Carousel.Item>
-        <Carousel.Item>
-          <img
-            className="d-block w-100"
-            src={require('../../assets/images/banner2.jpg')}
-            alt="Second slide"
-          />
-
-          <Carousel.Caption>
-            <h3 className="carousel__label animate__animated animate__bounce"><i>Explore Homemade Recipes</i></h3>
-            <NavLink to='/recipes'><button className="carousel__button">EXPLORE NOW</button></NavLink>
-          </Carousel.Caption>
-        </Carousel.Item>
-        <Carousel.Item>
-          <img
-            className="d-block w-100"
-            src={require('../../assets/images/banner3.jpg')}
-            alt="Third slide"
-          />
-
-          <Carousel.Caption>
-            <h3 className="carousel__label animate__animated animate__bounce"><i>Explore Homemade Recipes</i></h3>
-            <NavLink to='/recipes'><button className="carousel__button">EXPLORE NOW</button></NavLink>
-          </Carousel.Caption>
-        </Carousel.Item>
-      </Carousel>
+      <Banner />
 
       <div className="main">
         {/* Editor Choice */}
@@ -177,7 +142,7 @@ export default function Home() {
 
         {/* Feedback */}
         <div className="feedback">
-          
+
         </div>
       </div>
       {/* Footer */}
