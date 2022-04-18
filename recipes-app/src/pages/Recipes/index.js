@@ -9,8 +9,10 @@ export default function Recipes() {
             <Header />
 
             <div className="main" style={{ paddingTop: 2 + "rem", marginBottom: 5 + "rem" }}>
-                <div className="container overflow-hidden">
-                    <h1 style={{ marginBottom: 30, textAlign: "center" }}><i>Homemade Recipes</i></h1>
+                <div className="container">
+                    <h1 style={{ marginBottom: 30, textAlign: "center" }}><i>Recipes</i></h1>
+                    <p className="intro">Explore our huge selection of delicious recipe ideas including; easy desserts, delicious vegan and vegetarian dinner ideas, gorgeous pasta recipes, quick bakes, family-friendly meals and gluten-free recipes.</p>
+
                     <RecipesCard />
                 </div>
             </div>

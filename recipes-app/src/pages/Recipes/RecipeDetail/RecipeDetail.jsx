@@ -1,13 +1,14 @@
+import { collection, doc, getDoc, getDocs } from 'firebase/firestore'
 import React, { useEffect, useState } from 'react'
 import { Button, Col, Container, Row } from 'react-bootstrap'
+import { useDispatch } from 'react-redux'
+import { useParams } from 'react-router-dom'
+import Swal from 'sweetalert2'
+import { db } from '../../../firebase'
 import Footer from '../../components/Footer/Footer'
 import Header from '../../components/Header/Header'
-import axios from 'axios'
-import { useParams } from 'react-router-dom'
-import './RecipeDetail.scss'
-import { useDispatch } from 'react-redux'
 import { addRecipe } from '../recipeSlide'
-import Swal from 'sweetalert2'
+import './RecipeDetail.scss'
 
 export default function RecipeDetail() {
   const { recipeID } = useParams();
@@ -15,10 +16,19 @@ export default function RecipeDetail() {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    axios.get(`https://maxim-db.herokuapp.com/recipes/${recipeID}`)
-      .then((res) => { setRecipes(res.data) })
-      .catch((err) => { throw err });
+    const getRecipes = async () => {
+      const recipeDoc = doc(db, "recipes", recipeID);
+      const data = await getDoc(recipeDoc);
+      setRecipes([data.data()]);
+    }
+
+    getRecipes();
+    console.log('1');
   }, [])
+
+  const handleTextareaTransform = (value) => {
+    return value.replace(/--/g, '').split('\n')
+  }
 
   const handleSave = () => {
     return new Promise(resolve => {
@@ -36,50 +46,60 @@ export default function RecipeDetail() {
     })
   }
 
+
   return (
     <div>
       <Header />
 
+      {console.log('2', recipes)}
       <div className="recipes my-4">
         <Container>
-          <Row className="justify-content-center">
-            <Col xs="auto">
-              <div className="recipes__image">
-                <img src={require(`../../../assets/upload/product${recipeID}.jpg`)} alt="" />
-              </div>
-              <div className="recipes__save">
-                <Button onClick={handleSave}>Save</Button>
-              </div>
-              <div className="recipes__ingredients">
-                <i><span>Ingredients</span></i>
-                <div dangerouslySetInnerHTML={{ __html: recipes.ingredients }}></div>
-              </div>
-            </Col>
-            <Col>
-              <div className="recipes__info">
-                <h2 className="recipes__title">{recipes.title}</h2>
-                <hr></hr>
-                <p className="recipes__description">"{recipes.description}"</p>
-                <hr></hr>
-                <div className="recipes__detail">
-                  <div className="serves">
-                    <span>{recipes.serves}</span>
+          {
+            recipes.map((recipe, index) => (
+              <Row className="justify-content-center" key={index}>
+                <Col xs="auto">
+                  <div className="recipes__image">
+                    <img src={recipe.image.url} alt="" />
                   </div>
-                  <div className="time">
-                    <span>{recipes.times}</span>
+                  <div className="recipes__save">
+                    <Button onClick={handleSave}>Save</Button>
                   </div>
-                  <div className="difficulty">
-                    <span>{recipes.difficulty}</span>
+                  <div className="recipes__ingredients">
+                    <h3>Ingredient:</h3>
+                    <ul>
+                      {handleTextareaTransform(recipe.ingredients).map((ingredient, index) => (
+                        <li key={index}>{ingredient}</li>
+                      ))}
+                    </ul>
                   </div>
-                </div>
-                <hr></hr>
-                <div className="recipes__method">
-                  <i><span>Method</span></i>
-                  <div dangerouslySetInnerHTML={{ __html: recipes.method }}></div>
-                </div>
-              </div>
-            </Col>
-          </Row>
+                </Col>
+                <Col>
+                  <div className="recipes__info">
+                    <h2 className="recipes__title">{recipe.title}</h2>
+                    <hr></hr>
+                    <p className="recipes__description">"{recipe.description}"</p>
+                    <hr></hr>
+                    <div className="recipes__detail">
+                      <div className="serves">
+                        <span>{recipe.serves}</span>
+                      </div>
+                      <div className="time">
+                        <span>{recipe.times}</span>
+                      </div>
+                      <div className="difficulty">
+                        <span>{recipe.difficulty}</span>
+                      </div>
+                    </div>
+                    <hr></hr>
+                    <div className="recipes__method">
+                      <i><span>Method</span></i>
+                      <div dangerouslySetInnerHTML={{ __html: recipe.method }}></div>
+                    </div>
+                  </div>
+                </Col>
+              </Row>
+            ))
+          }
         </Container>
       </div>
 
