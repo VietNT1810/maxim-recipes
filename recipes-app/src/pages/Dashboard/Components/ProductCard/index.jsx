@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Button, Col, Row } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 ProductCard.propTypes = {
     cards: PropTypes.array,
@@ -36,7 +37,9 @@ function ProductCard(props) {
         <Col>
             <Row className="justify-content-between">
                 <Col xs="auto"><h1>Products</h1></Col>
-                <Col xs="auto" className="d-flex align-items-center">Add</Col>
+                <Col xs="auto" className="d-flex align-items-center">
+                    <Button as={Link} to="/dashboard/products/create" variant="success">Add</Button>
+                </Col>
             </Row>
             <Row className="gy-5">
                 {
@@ -46,12 +49,12 @@ function ProductCard(props) {
                                 <img src={card.image.url} className="card-img-top" alt="Error getting image" />
                                 <div className="card-body">
                                     <h6 className="recipes__title">{card.title}</h6>
-                                    <h3>Ingredient:</h3>
+                                    {/* <h3>Ingredient:</h3>
                                     <ul>
                                         {handleTextareaTransform(card.ingredients).map((ingredient, index) => (
                                             <li key={index}>{ingredient}</li>
                                         ))}
-                                    </ul>
+                                    </ul> */}
                                     <Row>
                                         <Col>
                                             <Button variant="outline-secondary" className="w-100" onClick={() => handleEditClick(card.id)} >Edit</Button>
