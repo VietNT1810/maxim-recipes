@@ -1,9 +1,10 @@
-import { collection, doc, getDoc, getDocs } from 'firebase/firestore'
+import { doc, getDoc } from 'firebase/firestore'
 import React, { useEffect, useState } from 'react'
 import { Button, Col, Container, Row } from 'react-bootstrap'
 import { useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import Swal from 'sweetalert2'
+import { RECIPES_DIFFICULTY_OPTIONS } from '../../../constants/global'
 import { db } from '../../../firebase'
 import Footer from '../../components/Footer/Footer'
 import Header from '../../components/Header/Header'
@@ -28,6 +29,11 @@ export default function RecipeDetail() {
 
   const handleTextareaTransform = (value) => {
     return value.replace(/--/g, '').split('\n')
+  }
+
+  const handleSelectedOption = (selectedOption) => {
+    const selected = RECIPES_DIFFICULTY_OPTIONS.find(option => option.value === selectedOption);
+    return (selected.label);
   }
 
   const handleSave = () => {
@@ -87,7 +93,7 @@ export default function RecipeDetail() {
                         <span>{recipe.times}</span>
                       </div>
                       <div className="difficulty">
-                        <span>{recipe.difficulty}</span>
+                        <span>{handleSelectedOption(recipe.difficulty)}</span>
                       </div>
                     </div>
                     <hr></hr>
