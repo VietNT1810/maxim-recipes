@@ -10,14 +10,23 @@ export default function Recipes() {
 
             <div className="main" style={{ paddingTop: 2 + "rem", marginBottom: 5 + "rem" }}>
                 <div className="container">
-                    <h1 style={{ marginBottom: 30, textAlign: "center" }}><i>Recipes</i></h1>
-                    <p className="intro">Explore our huge selection of delicious recipe ideas including; easy desserts, delicious vegan and vegetarian dinner ideas, gorgeous pasta recipes, quick bakes, family-friendly meals and gluten-free recipes.</p>
+                    <h1
+                        style={{ marginBottom: 30, textAlign: "center" }}
+                    >
+                        <i>Recipes</i>
+                    </h1>
+                    <p
+                        className="intro"
+                        style={{ textAlign: "center", marginBottom: "2rem" }}
+                    >
+                        Explore our huge selection of delicious recipe ideas including; easy desserts, delicious vegan and vegetarian dinner ideas, gorgeous pasta recipes, quick bakes, family-friendly meals and gluten-free recipes.
+                    </p>
 
                     <RecipesCard />
                 </div>
             </div>
 
             <Footer />
-        </div>
+        </div >
     )
 }
