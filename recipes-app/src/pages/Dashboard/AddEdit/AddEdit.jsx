@@ -114,6 +114,7 @@ export default function AddEdit() {
                         showConfirmButton: false,
                         timer: 1500
                     })
+                    setForm({});
                 });
         } else {
             if (prevImageInfo.current === imageInfo) {
@@ -127,7 +128,7 @@ export default function AddEdit() {
                             showConfirmButton: false,
                             timer: 1500
                         })
-                    });;
+                    });
             } else {
                 const newEditedValues = { ...form, image: imageInfo };
                 const recipeDoc = doc(db, "recipes", recipeID);
@@ -139,7 +140,7 @@ export default function AddEdit() {
                             showConfirmButton: false,
                             timer: 1500
                         })
-                    });;
+                    });
             }
         }
     }

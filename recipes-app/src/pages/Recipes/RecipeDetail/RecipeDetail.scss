@@ -25,6 +25,12 @@
     }
   }
 
+  &__image {
+    img {
+      width: 100%;
+    }
+  }
+
   &__ingredients,
   &__method {
     span {
@@ -38,6 +44,5 @@
       border: none;
       margin: 1rem 0;
     }
-    
   }
 }

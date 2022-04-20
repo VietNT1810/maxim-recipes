@@ -57,7 +57,7 @@ export default function RecipeDetail() {
           {
             recipes.map((recipe, index) => (
               <Row className="justify-content-center" key={index}>
-                <Col xs="auto">
+                <Col xs="4">
                   <div className="recipes__image">
                     <img src={recipe.image.url} alt="" />
                   </div>
@@ -93,7 +93,11 @@ export default function RecipeDetail() {
                     <hr></hr>
                     <div className="recipes__method">
                       <i><span>Method</span></i>
-                      <div dangerouslySetInnerHTML={{ __html: recipe.method }}></div>
+                      <ol>
+                        {handleTextareaTransform(recipe.method).map((item, index) => (
+                          <li key={index}>{item}</li>
+                        ))}
+                      </ol>
                     </div>
                   </div>
                 </Col>
