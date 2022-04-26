@@ -49,12 +49,12 @@ function ProductCard(props) {
                                 <img src={card.image.url} className="card-img-top" alt="Error getting image" />
                                 <div className="card-body">
                                     <h6 className="recipes__title">{card.title}</h6>
-                                    {/* <h3>Ingredient:</h3>
-                                    <ul>
-                                        {handleTextareaTransform(card.ingredients).map((ingredient, index) => (
-                                            <li key={index}>{ingredient}</li>
-                                        ))}
-                                    </ul> */}
+                                    <div className="recipes__time">
+                                        <span>
+                                            <i className="bi bi-clock"></i>
+                                            {card.times}
+                                        </span>
+                                    </div>
                                     <Row>
                                         <Col>
                                             <Button variant="outline-secondary" className="w-100" onClick={() => handleEditClick(card.id)} >Edit</Button>

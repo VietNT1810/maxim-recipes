@@ -1,9 +1,23 @@
-import React from 'react'
+import { collection, getDocs } from 'firebase/firestore';
+import React, { useEffect, useState } from 'react'
+import { db } from '../../firebase';
 import Footer from '../components/Footer/Footer'
 import Header from '../components/Header/Header'
 import RecipesCard from './components/RecipesCard'
 
 export default function Recipes() {
+    const [recipes, setRecipes] = useState([]);
+
+    useEffect(() => {
+        const getRecipes = async () => {
+            const recipesCollectionRef = collection(db, "recipes")
+            const data = await getDocs(recipesCollectionRef);
+            setRecipes(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+        }
+
+        getRecipes();
+    }, [])
+
     return (
         <div>
             <Header />
@@ -22,7 +36,7 @@ export default function Recipes() {
                         Explore our huge selection of delicious recipe ideas including; easy desserts, delicious vegan and vegetarian dinner ideas, gorgeous pasta recipes, quick bakes, family-friendly meals and gluten-free recipes.
                     </p>
 
-                    <RecipesCard />
+                    <RecipesCard recipes={recipes} />
                 </div>
             </div>
 

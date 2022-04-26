@@ -6,7 +6,7 @@ import Login from './pages/Login/Login';
 import Register from './pages/Register';
 import Recipes from './pages/Recipes/index';
 import RecipeDetail from './pages/Recipes/RecipeDetail/RecipeDetail';
-import Saved from './pages/Saved/Saved';
+import Saved from './pages/Saved';
 
 function App() {
   return (
