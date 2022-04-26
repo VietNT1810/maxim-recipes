@@ -1,10 +1,27 @@
+import { signOut } from 'firebase/auth'
 import React from 'react'
 import { Dropdown } from 'react-bootstrap'
-import { NavLink } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom"
 import { Button, Col, Container, Row } from 'reactstrap'
+import { auth } from '../../../firebase'
+import { useAuth } from '../../../hooks/useAuth'
 import './Header.scss'
 
 export default function Header() {
+    const currentUser = useAuth();
+    const navigate = useNavigate();
+
+    const handleLogoutClick = async () => {
+        await signOut(auth)
+            .then(() => {
+                navigate('/login');
+            })
+    }
+
+    const handleLoginClick = () => {
+        navigate('/login');
+    }
+
     return (
         <>
             <div className="stick"></div>
@@ -28,20 +45,24 @@ export default function Header() {
                             </Col>
                         </Col>
                         <Col xs="auto" className="">
-                            {/* <Button className="header__login" outline>Login</Button> */}
-                            <Dropdown>
-                                <Dropdown.Toggle className="header__dropdown" variant='outline-warning' id="dropdown-basic" bsPrefix="null">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" className="bi bi-person-circle" viewBox="0 0 16 16">
-                                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-                                        <path fillRule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
-                                    </svg>
-                                </Dropdown.Toggle>
+                            {console.log(currentUser?.email)}
 
-                                <Dropdown.Menu>
-                                    <Dropdown.Item><NavLink to="/saved" className="header__save">Saved Recipes</NavLink></Dropdown.Item>
-                                    <Dropdown.Item href="/login">Log out</Dropdown.Item>
-                                </Dropdown.Menu>
-                            </Dropdown>
+                            {currentUser ?
+                                <Dropdown>
+                                    <Dropdown.Toggle className="header__dropdown" variant='outline-warning' id="dropdown-basic" bsPrefix="null">
+                                        <i className="bi bi-person-circle" style={{ fontSize: '1.5rem' }}></i>
+                                    </Dropdown.Toggle>
+
+                                    <Dropdown.Menu>
+                                        <Dropdown.Item disabled>{currentUser?.email}</Dropdown.Item>
+                                        <Dropdown.Divider />
+                                        <Dropdown.Item href="/saved" className="header__save">Saved Recipes</Dropdown.Item>
+                                        <Dropdown.Item onClick={handleLogoutClick}>Log out</Dropdown.Item>
+                                    </Dropdown.Menu>
+                                </Dropdown>
+                                :
+                                <Button onClick={handleLoginClick} className="header__login" outline>Login</Button>
+                            }
                         </Col>
                     </Row>
                 </Container>

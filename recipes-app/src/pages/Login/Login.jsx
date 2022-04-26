@@ -1,29 +1,24 @@
-import axios from "axios";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { Formik } from "formik";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Button, FloatingLabel, Form } from "react-bootstrap";
-import { useNavigate } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { auth } from "../../firebase";
 
 export default function Login() {
-  const [accounts, setAccounts] = useState({});
-  const [form, setForm] = useState({});
+  const [form, setForm] = useState({
+    email: '',
+    password: ''
+  });
   const navigate = useNavigate();
 
-  useEffect(() => {
-    axios.get(`https://maxim-db.herokuapp.com/users`)
-      .then((res) => { setAccounts(res.data) })
-  }, [])
-
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value })
-  };
 
   const handleValidate = () => {
     const error = {};
 
-    if (!form.username) {
-      error.username = "This field is required";
+    if (!form.email) {
+      error.email = "This field is required";
     }
 
     if (!form.password) {
@@ -31,29 +26,34 @@ export default function Login() {
     }
 
     return error;
-
   }
 
-  const handleSubmit = (e) => {
-    accounts.map((account) => {
-      if (form.username === account.username && form.password === account.password) {
-        if (account.role === 'admin') {
-          navigate("/dashboard")
-        } else {
-          navigate("/")
-        }
-      } else {
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Wrong username or password!',
-          footer: `<a href="#">Don't have an account? Register one!</a>`
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value })
+  }
+
+  const handleSubmit = async () => {
+    try {
+      await signInWithEmailAndPassword(auth, form.email, form.password)
+        .then(() => {
+          Swal.fire({
+            icon: 'success',
+            title: 'Logged in!',
+            showConfirmButton: false,
+            timer: 1500
+          }).then(() => {
+            navigate('/');
+          })
         })
-      }
-    })
+    } catch (error) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Incorrect email or password!',
+        footer: `<p>Don't have an account? <a href='/register'>Register here</a></p>`
+      })
+    }
   };
-
-
 
   return (
     <div>
@@ -72,12 +72,12 @@ export default function Login() {
                       <h3 className="fw-normal mb-3 pb-3" style={{ letterSpacing: "1px" }}> Log in </h3>
                       <FloatingLabel
                         controlId="floatingInput"
-                        label="Username"
+                        label="Email"
                         className="mb-4"
                       >
-                        <Form.Control type="text" name="username" value={form.username || ''} onChange={handleChange} className={errors.username ? 'is-invalid' : ''} />
+                        <Form.Control type="email" name="email" onChange={handleChange} className={errors.email ? 'is-invalid' : ''} />
                         <Form.Text className="text-danger">
-                          {errors.username}
+                          {errors.email}
                         </Form.Text>
                       </FloatingLabel>
                       <FloatingLabel
@@ -85,30 +85,32 @@ export default function Login() {
                         label="Password"
                         className="mb-4"
                       >
-                        <Form.Control type="password" name="password" value={form.password || ''} onChange={handleChange} className={errors.password ? 'is-invalid' : ''} />
+                        <Form.Control type="password" name="password" onChange={handleChange} className={errors.password ? 'is-invalid' : ''} />
                         <Form.Text className="text-danger">
                           {errors.password}
                         </Form.Text>
                       </FloatingLabel>
-                      <div className="pt-1 mb-4">
-                        <Button
-                          variant="primary btn-lg btn-block w-100"
-                          type="submit"
-                        >
-                          SIGN IN
-                        </Button>
-                      </div>
+                      <Button
+                        className="pt-1 mb-4"
+                        variant="primary btn-lg btn-block w-100"
+                        type="submit"
+                      >
+                        SIGN IN
+                      </Button>
                       {/* <p className="small mb-5 pb-lg-2"><a className="text-muted" href="#!">Forgot password?</a></p> */}
-                      {/* <p>Don't have an account? <a href="#!" className="link-info">Register here</a></p> */}
+                      <p>Don't have an account? <NavLink to='/register'>Register here</NavLink></p>
                     </Form>
                   )}
                 </Formik>
+                <form>
+
+                </form>
               </div>
             </div>
             <div className="col-sm-6 px-0 d-none d-sm-block">
               <img
-                src={require(`../../../assets/images/login.jpg`)}
-                alt="Login image"
+                src={require(`../../assets/images/login.jpg`)}
+                alt="Missing"
                 className="w-100 vh-100"
                 style={{ objectFit: "cover", objectPosition: "left" }}
               />
