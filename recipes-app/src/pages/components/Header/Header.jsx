@@ -45,8 +45,6 @@ export default function Header() {
                             </Col>
                         </Col>
                         <Col xs="auto" className="">
-                            {console.log(currentUser?.email)}
-
                             {currentUser ?
                                 <Dropdown>
                                     <Dropdown.Toggle className="header__dropdown" variant='outline-warning' id="dropdown-basic" bsPrefix="null">

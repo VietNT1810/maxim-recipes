@@ -25,7 +25,6 @@ export default function RecipesCard({ recipes }) {
                                         <span>
                                             <i className="bi bi-clock"></i>
                                             {card.times}
-                                            {console.log(card.image.url)}
                                         </span>
                                     </div>
                                     <h5 className="recipes__title">{card.title}</h5>

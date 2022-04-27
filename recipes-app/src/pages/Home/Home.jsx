@@ -1,12 +1,27 @@
-import React from 'react'
-import Header from '../components/Header/Header'
-import { Button, Carousel, Col, Container, Row } from "react-bootstrap"
-import { NavLink, Outlet } from "react-router-dom"
-import './Home.scss';
-import Footer from '../components/Footer/Footer';
+import { collection, getDocs, limit, query } from 'firebase/firestore';
+import React, { useEffect, useState } from 'react';
+import { Button, Col, Container, Row } from "react-bootstrap";
+import { db } from '../../firebase';
 import Banner from '../components/Banner';
+import Footer from '../components/Footer/Footer';
+import Header from '../components/Header/Header';
+import RecipesCard from '../Recipes/components/RecipesCard';
+import './Home.scss';
 
 export default function Home() {
+  const [recipes, setRecipes] = useState([]);
+  useEffect(() => {
+    const getData = async () => {
+      const recipesCollection = collection(db, 'recipes');
+      const queryRecipes = query(recipesCollection, limit(12));
+      const queryData = await getDocs(queryRecipes);
+      setRecipes(queryData.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    }
+    getData();
+  }, [])
+
+  console.log(recipes);
+
   return (
     <div>
       {/* Header */}
@@ -23,10 +38,10 @@ export default function Home() {
               <h3>EDITOR'S CHOICE</h3>
             </div>
             <Row>
-              <Col xs="3"><a href="#"><img src={require(`../../assets/images/pick1.jpg`)} alt="" /></a></Col>
-              <Col xs="3"><a href="#"><img src={require(`../../assets/images/pick2.jpg`)} alt="" /></a></Col>
-              <Col xs="3"><a href="#"><img src={require(`../../assets/images/pick3.jpg`)} alt="" /></a></Col>
-              <Col xs="3"><a href="#"><img src={require(`../../assets/images/pick4.jpg`)} alt="" /></a></Col>
+              <Col xs="3"><a href="/recipes"><img src={require(`../../assets/images/pick1.jpg`)} alt="" /></a></Col>
+              <Col xs="3"><a href="/recipes"><img src={require(`../../assets/images/pick2.jpg`)} alt="" /></a></Col>
+              <Col xs="3"><a href="/recipes"><img src={require(`../../assets/images/pick3.jpg`)} alt="" /></a></Col>
+              <Col xs="3"><a href="/recipes"><img src={require(`../../assets/images/pick4.jpg`)} alt="" /></a></Col>
             </Row>
           </Container>
         </div>
@@ -80,60 +95,9 @@ export default function Home() {
             <div className="title recipes__title">
               <h3>RECIPES</h3>
             </div>
-            <Row>
-              <Col xs="3">
-                <div className="card" style={{ width: 100 + "%", height: 100 + "%" }}>
-                  <img src={require(`../../assets/images/recipes1.jpg`)} className="card-img-top" alt="..." />
-                  <div className="card-body">
-                    <div className="recipes__time">
-                      <span>
-                        MEDIUM
-                      </span>
-                    </div>
-                    <h5 className="recipes__title">Indian-inspired frittata</h5>
-                  </div>
-                </div>
-              </Col>
-              <Col xs="3">
-                <div className="card" style={{ width: 100 + "%", height: 100 + "%" }}>
-                  <img src={require(`../../assets/images/recipes2.jpg`)} className="card-img-top" alt="..." />
-                  <div className="card-body">
-                    <div className="recipes__time">
-                      <span>
-                        HARD
-                      </span>
-                    </div>
-                    <h5 className="recipes__title">Joe Wick's Ravioli alla Napoletana</h5>
-                  </div>
-                </div>
-              </Col>
-              <Col xs="3">
-                <div className="card" style={{ width: 100 + "%", height: 100 + "%" }}>
-                  <img src={require(`../../assets/images/recipes3.jpg`)} className="card-img-top" alt="..." />
-                  <div className="card-body">
-                    <div className="recipes__time">
-                      <span>
-                        MEDIUM
-                      </span>
-                    </div>
-                    <h5 className="recipes__title">Malaysian-style whole fish</h5>
-                  </div>
-                </div>
-              </Col>
-              <Col xs="3">
-                <div className="card" style={{ width: 100 + "%", height: 100 + "%" }}>
-                  <img src={require(`../../assets/images/recipes4.jpg`)} className="card-img-top" alt="..." />
-                  <div className="card-body">
-                    <div className="recipes__time">
-                      <span>
-                        EASY
-                      </span>
-                    </div>
-                    <h5 className="recipes__title">Best roast leg of lamb</h5>
-                  </div>
-                </div>
-              </Col>
-            </Row>
+
+            <RecipesCard recipes={recipes} />
+
             <div className="recipes__button">
               <Button variant="outline-warning" href="/recipes">WATCH MORE</Button>
             </div>
