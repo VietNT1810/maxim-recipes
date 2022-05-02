@@ -1,7 +1,7 @@
 import { collection, deleteDoc, doc, getDoc, getDocs, setDoc } from 'firebase/firestore'
 import React, { useEffect, useRef, useState } from 'react'
 import { Button, Col, Container, Row } from 'react-bootstrap'
-import { useParams } from 'react-router-dom'
+import { NavLink, useParams } from 'react-router-dom'
 import { RECIPES_DIFFICULTY_OPTIONS } from '../../../constants/global'
 import { db } from '../../../firebase'
 import { useAuth } from '../../../hooks/useAuth'
@@ -14,6 +14,7 @@ export default function RecipeDetail() {
   const [recipes, setRecipes] = useState([]);
   const [recipe, setRecipe] = useState([]);
   const [isSaved, setIsSaved] = useState(false);
+  const [modal, setModal] = useState(false);
   const currentUser = useAuth();
 
   const isFirstRun = useRef(true);
@@ -51,7 +52,7 @@ export default function RecipeDetail() {
         }
       });
     }
-    getSavedRecipes();
+    if (currentUser) getSavedRecipes();
   }, [currentUser])
 
   const handleTextareaTransform = (value) => {
@@ -64,29 +65,31 @@ export default function RecipeDetail() {
   }
 
   const handleSave = async () => {
-    if (!isSaved) {
-      const usersDoc = doc(db, "users", currentUser.uid);
-      const savedCollection = collection(usersDoc, 'saved');
-      const savedRef = doc(savedCollection, recipeID)
-      await setDoc(savedRef, recipe).then(() => {
-        setIsSaved(!isSaved);
-      })
+    if (currentUser) {
+      if (!isSaved) {
+        const usersDoc = doc(db, "users", currentUser.uid);
+        const savedCollection = collection(usersDoc, 'saved');
+        const savedRef = doc(savedCollection, recipeID)
+        await setDoc(savedRef, recipe).then(() => {
+          setIsSaved(!isSaved);
+        })
+      } else {
+        const usersDoc = doc(db, "users", currentUser.uid);
+        const savedCollection = collection(usersDoc, 'saved');
+        const savedRef = doc(savedCollection, recipeID);
+        await deleteDoc(savedRef).then(() => {
+          setIsSaved(!isSaved);
+        })
+      }
     } else {
-      const usersDoc = doc(db, "users", currentUser.uid);
-      const savedCollection = collection(usersDoc, 'saved');
-      const savedRef = doc(savedCollection, recipeID);
-      await deleteDoc(savedRef).then(() => {
-        setIsSaved(!isSaved);
-      })
+      setModal(true);
     }
   }
-
 
   return (
     <div>
       <Header />
 
-      {console.log('2', recipes)}
       <div className="recipes my-4">
         <Container>
           {
@@ -98,7 +101,14 @@ export default function RecipeDetail() {
                   </div>
                   <div className="recipes__save">
                     <Button onClick={handleSave}>{isSaved ? 'Saved' : 'Save'}</Button>
+                    <div className={`recipes__save--modal ${modal ? 'active' : ''}`}>
+                      <NavLink to='/login'>Log in</NavLink> or <NavLink to='/register'>Register</NavLink> to save your favorite recipes.
+                      <span className="close" onClick={() => { setModal(false) }}>
+                        <i className="bi bi-x-circle"></i>
+                      </span>
+                    </div>
                   </div>
+
                   <div className="recipes__ingredients">
                     <h3>Ingredient:</h3>
                     <ul>
@@ -143,6 +153,6 @@ export default function RecipeDetail() {
       </div>
 
       <Footer />
-    </div>
+    </div >
   )
 }

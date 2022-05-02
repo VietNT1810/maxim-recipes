@@ -6,7 +6,7 @@ import './Banner.scss';
 function Banner() {
     return (
         <div className="carousel">
-            <Carousel interval={2000}>
+            <Carousel interval={2000} pause={false}>
                 <Carousel.Item>
                     <img
                         className="d-block w-100"

@@ -4,7 +4,9 @@ import { Button } from 'react-bootstrap';
 import { db } from '../../firebase';
 import Footer from '../components/Footer/Footer'
 import Header from '../components/Header/Header'
+import SkeletonCard from '../components/Skeletons/SkeletonCard';
 import RecipesCard from './components/RecipesCard'
+
 
 export default function Recipes() {
     const [recipes, setRecipes] = useState([]);
@@ -48,9 +50,9 @@ export default function Recipes() {
         updateState(queryData);
     }
 
-    if (recipes.length === 0) {
-        return <h1>Loading...</h1>;
-    }
+    // if (recipes.length === 0) {
+    //     return <h1>Loading...</h1>;
+    // }
 
     return (
         <div>
@@ -70,7 +72,9 @@ export default function Recipes() {
                         Explore our huge selection of delicious recipe ideas including; easy desserts, delicious vegan and vegetarian dinner ideas, gorgeous pasta recipes, quick bakes, family-friendly meals and gluten-free recipes.
                     </p>
 
-                    <RecipesCard recipes={recipes} />
+                    {recipes && <RecipesCard recipes={recipes} />}
+
+                    {!recipes && [1, 2, 3, 4, 5].map((n) => <SkeletonCard key={n} />)}
 
                     {!isEmpty && <div className="recipes__button">
                         <Button

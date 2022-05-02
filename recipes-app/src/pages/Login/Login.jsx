@@ -1,10 +1,11 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { Formik } from "formik";
 import React, { useState } from "react";
-import { Button, FloatingLabel, Form } from "react-bootstrap";
+import { Button, Col, Container, FloatingLabel, Form, Row } from "react-bootstrap";
 import { NavLink, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { auth } from "../../firebase";
+import './Login.scss'
 
 export default function Login() {
   const [form, setForm] = useState({
@@ -58,10 +59,14 @@ export default function Login() {
   return (
     <div>
       <section className="vh-100">
-        <div className="container-fluid">
-          <div className="row">
-            <div className="col-sm-6 text-black">
-              <div className="d-flex justify-content-center align-items-center h-100 ">
+        <Container fluid>
+          <Row>
+            <Col sm={6}>
+              <div className="login__logo">
+                <NavLink to='/'>Maxim</NavLink>
+              </div>
+
+              <div className="d-flex justify-content-center align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
                 <Formik
                   initialValues={form}
                   validate={handleValidate}
@@ -69,6 +74,7 @@ export default function Login() {
                 >
                   {({ errors, handleSubmit }) => (
                     <Form onSubmit={handleSubmit} style={{ width: "23rem" }}>
+
                       <h3 className="fw-normal mb-3 pb-3" style={{ letterSpacing: "1px" }}> Log in </h3>
                       <FloatingLabel
                         controlId="floatingInput"
@@ -102,21 +108,18 @@ export default function Login() {
                     </Form>
                   )}
                 </Formik>
-                <form>
-
-                </form>
               </div>
-            </div>
-            <div className="col-sm-6 px-0 d-none d-sm-block">
+            </Col>
+            <Col sm={6} className="px-0 d-none d-sm-block">
               <img
                 src={require(`../../assets/images/login.jpg`)}
                 alt="Missing"
                 className="w-100 vh-100"
                 style={{ objectFit: "cover", objectPosition: "left" }}
               />
-            </div>
-          </div>
-        </div>
+            </Col>
+          </Row>
+        </Container>
       </section >
     </div >
   );

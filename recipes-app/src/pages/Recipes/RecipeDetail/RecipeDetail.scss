@@ -40,9 +40,43 @@
 
   &__save {
     .btn-primary {
-      background-color: orange;
+      background-color: #fda65d;
       border: none;
       margin: 1rem 0;
+    }
+
+    &--modal {
+      position: absolute;
+      border: 3px solid #fda65d;
+      background-color: white;
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      white-space: pre-wrap;
+      box-shadow: 0 0 10px 0 rgb(0 0 0 / 30%);
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+
+      a {
+        color: #fda65d;
+      }
+
+      .close {
+        display: inline-block;
+        margin-left: 10px;
+        cursor: pointer;
+
+        .bi {
+          font-size: 25px;
+          color: #fda65d;
+        }
+      }
+    }
+
+    .active {
+      opacity: 1;
+      transform: translateY(0px);
     }
   }
   .difficulty {
