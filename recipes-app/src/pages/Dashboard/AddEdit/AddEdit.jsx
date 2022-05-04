@@ -37,27 +37,35 @@ export default function AddEdit() {
     const handleValidate = () => {
         const error = {};
 
-        // if (!form.title) {
-        //     error.title = "This field is required";
-        // }
+        if (!form.title) {
+            error.title = "This field is required";
+        }
 
-        // if (!form.description) {
-        //     error.description = "This field is required";
-        // }
+        if (!form.description) {
+            error.description = "This field is required";
+        }
 
-        // if (!form.serves) {
-        //     error.serves = 'This field is required';
-        // } else if (isNaN(form.serves)) {
-        //     error.serves = 'Invalid number';
-        // }
+        if (!form.serves) {
+            error.serves = 'This field is required';
+        } else if (isNaN(form.serves)) {
+            error.serves = 'Invalid number';
+        }
 
-        // if (!form.times) {
-        //     error.times = "This field is required";
-        // }
+        if (!form.times) {
+            error.times = "This field is required";
+        }
 
-        // if (!form.difficulty) {
-        //     error.difficulty = "This field is required";
-        // }
+        if (!form.difficulty) {
+            error.difficulty = "This field is required";
+        }
+
+        if (!form.ingredients) {
+            error.ingredients = "This field is required";
+        }
+
+        if (!form.method) {
+            error.method = "This field is required";
+        }
 
         return error;
     }
@@ -150,7 +158,7 @@ export default function AddEdit() {
         <div className="dashboard" style={{ marginLeft: 250 }}>
             <Container fluid>
                 <Row className="flex-nowrap">
-                    <Col>
+                    <Col style={{ margin: '1rem auto' }}>
                         <h1>Add Product</h1>
                         <Formik
                             initialValues={form}
@@ -238,6 +246,9 @@ export default function AddEdit() {
                                                 value={selectedOption}
                                                 options={RECIPES_DIFFICULTY_OPTIONS}
                                             />
+                                            <Form.Text className="text-danger">
+                                                {errors.difficulty}
+                                            </Form.Text>
                                         </Form.Group>
                                     </Row>
 

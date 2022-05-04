@@ -15,7 +15,7 @@ export default function Users() {
         <div className="dashboard" style={{ marginLeft: 250 }}>
             <Container fluid>
                 <Row className="flex-nowrap">
-                    <Col>
+                    <Col style={{ margin: '1rem auto' }}>
                         <Row>
                             <Col><h1>Users</h1></Col>
                         </Row>

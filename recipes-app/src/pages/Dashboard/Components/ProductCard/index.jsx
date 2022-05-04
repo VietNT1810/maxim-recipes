@@ -34,7 +34,7 @@ function ProductCard(props) {
     }
 
     return (
-        <Col>
+        <Col style={{ margin: '1rem auto' }}>
             <Row className="justify-content-between">
                 <Col xs="auto"><h1>Products</h1></Col>
                 <Col xs="auto" className="d-flex align-items-center">
@@ -45,17 +45,17 @@ function ProductCard(props) {
                 {
                     cards.map((card) => (
                         <Col className="col-2" key={card.id}>
-                            <div className="card" style={{ width: 100 + "%" }}>
+                            <div className="card" style={{ width: "100%", height: "100%" }}>
                                 <img src={card.image.url} className="card-img-top" alt="Error getting image" />
-                                <div className="card-body">
-                                    <h6 className="recipes__title">{card.title}</h6>
+                                <div className="card-body d-flex flex-column">
                                     <div className="recipes__time">
                                         <span>
                                             <i className="bi bi-clock"></i>
                                             {card.times}
                                         </span>
                                     </div>
-                                    <Row>
+                                    <h6 className="recipes__title">{card.title}</h6>
+                                    <Row className="mt-auto">
                                         <Col>
                                             <Button variant="outline-secondary" className="w-100" onClick={() => handleEditClick(card.id)} >Edit</Button>
                                         </Col>
