@@ -2,7 +2,7 @@ import { addDoc, collection, doc, getDoc, updateDoc } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { Formik } from 'formik';
 import React, { useEffect, useRef, useState } from 'react';
-import { Button, Col, Container, Form, Row } from 'react-bootstrap';
+import { Button, Col, Container, Form, Row, Spinner } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import Select from 'react-select';
 import Swal from 'sweetalert2';
@@ -157,7 +157,7 @@ export default function AddEdit() {
                             validate={handleValidate}
                             onSubmit={handleSubmit}
                         >
-                            {({ errors, touched, handleSubmit, }) => (
+                            {({ errors, touched, handleSubmit, isSubmitting }) => (
                                 <Form onSubmit={handleSubmit} >
                                     <Row>
                                         <Col>
@@ -272,6 +272,7 @@ export default function AddEdit() {
                                     </Row>
 
                                     <Button variant="primary" type="submit">
+                                        {isSubmitting && <Spinner animation="border" size="sm" />}
                                         {create ? 'Submit' : 'Edit'}
                                     </Button>
                                 </Form>

@@ -1,11 +1,10 @@
-import { collection, getDocs, limit, query, startAfter, startAt } from 'firebase/firestore';
-import React, { useEffect, useState } from 'react'
+import { collection, getDocs, limit, query, startAfter } from 'firebase/firestore';
+import React, { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { db } from '../../firebase';
-import Footer from '../components/Footer/Footer'
-import Header from '../components/Header/Header'
-import SkeletonCard from '../components/Skeletons/SkeletonCard';
-import RecipesCard from './components/RecipesCard'
+import Footer from '../components/Footer/Footer';
+import Header from '../components/Header/Header';
+import RecipesCard from './components/RecipesCard';
 
 
 export default function Recipes() {
@@ -13,21 +12,25 @@ export default function Recipes() {
     const [lastDoc, setLastDoc] = useState();
     const recipesCollection = collection(db, 'recipes');
     const [isEmpty, setIsEmpty] = useState(false);
-    // useEffect(() => {
-    //     const getRecipes = async () => {
-    //         const recipesCollectionRef = collection(db, "recipes")
-    //         const data = await getDocs(recipesCollectionRef);
-    //         setRecipes(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-    //     }
-
-    //     getRecipes();
-    // }, [])
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const getData = async () => {
             const queryRecipes = query(recipesCollection, limit(12));
-            const queryData = await getDocs(queryRecipes);
-            updateState(queryData);
+            // const queryData = await getDocs(queryRecipes)
+            //     .then(() => {
+            //         updateState(queryData);
+            //         setLoading(false);
+            //     })
+
+            try {
+                const queryData = await getDocs(queryRecipes);
+                updateState(queryData);
+                setLoading(false);
+
+            } catch (error) {
+                console.log("Error getting cached document:", error);
+            }
         }
         getData();
     }, [])
@@ -46,13 +49,10 @@ export default function Recipes() {
 
     const getMore = async () => {
         const queryRecipes = query(recipesCollection, startAfter(lastDoc), limit(12));
-        const queryData = await getDocs(queryRecipes);
+        const queryData = await getDocs(queryRecipes)
         updateState(queryData);
+        setLoading(false);
     }
-
-    // if (recipes.length === 0) {
-    //     return <h1>Loading...</h1>;
-    // }
 
     return (
         <div>
@@ -72,9 +72,7 @@ export default function Recipes() {
                         Explore our huge selection of delicious recipe ideas including; easy desserts, delicious vegan and vegetarian dinner ideas, gorgeous pasta recipes, quick bakes, family-friendly meals and gluten-free recipes.
                     </p>
 
-                    {recipes && <RecipesCard recipes={recipes} />}
-
-                    {!recipes && [1, 2, 3, 4, 5].map((n) => <SkeletonCard key={n} />)}
+                    <RecipesCard recipes={recipes} loading={loading} />
 
                     {!isEmpty && <div className="recipes__button">
                         <Button

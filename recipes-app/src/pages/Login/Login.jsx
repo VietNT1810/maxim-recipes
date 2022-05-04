@@ -1,17 +1,14 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { Formik } from "formik";
 import React, { useState } from "react";
-import { Button, Col, Container, FloatingLabel, Form, Row } from "react-bootstrap";
+import { Button, Col, Container, FloatingLabel, Form, Row, Spinner } from "react-bootstrap";
 import { NavLink, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { auth } from "../../firebase";
 import './Login.scss'
 
 export default function Login() {
-  const [form, setForm] = useState({
-    email: '',
-    password: ''
-  });
+  const [form, setForm] = useState({});
   const navigate = useNavigate();
 
 
@@ -36,16 +33,14 @@ export default function Login() {
   const handleSubmit = async () => {
     try {
       await signInWithEmailAndPassword(auth, form.email, form.password)
-        .then(() => {
-          Swal.fire({
-            icon: 'success',
-            title: 'Logged in!',
-            showConfirmButton: false,
-            timer: 1500
-          }).then(() => {
-            navigate('/');
-          })
-        })
+      Swal.fire({
+        icon: 'success',
+        title: 'Logged in!',
+        showConfirmButton: false,
+        timer: 1500
+      }).then(() => {
+        navigate('/');
+      })
     } catch (error) {
       Swal.fire({
         icon: 'error',
@@ -72,7 +67,7 @@ export default function Login() {
                   validate={handleValidate}
                   onSubmit={handleSubmit}
                 >
-                  {({ errors, handleSubmit }) => (
+                  {({ errors, handleSubmit, isSubmitting }) => (
                     <Form onSubmit={handleSubmit} style={{ width: "23rem" }}>
 
                       <h3 className="fw-normal mb-3 pb-3" style={{ letterSpacing: "1px" }}> Log in </h3>
@@ -101,6 +96,7 @@ export default function Login() {
                         variant="primary btn-lg btn-block w-100"
                         type="submit"
                       >
+                        {isSubmitting && <Spinner animation="border" size="sm" />}
                         SIGN IN
                       </Button>
                       {/* <p className="small mb-5 pb-lg-2"><a className="text-muted" href="#!">Forgot password?</a></p> */}

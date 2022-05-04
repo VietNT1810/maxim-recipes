@@ -25,46 +25,6 @@ export default function Header() {
     return (
         <>
             <div className="stick"></div>
-            {/* <header className="header fixed-top">
-                <Container fluid>
-                    <Row className="justify-content-around align-items-center">
-                        <Col xs="auto" className="header__title" >
-                            <NavLink to="/">Maxim</NavLink>
-                        </Col>
-                        <Col xs="auto">
-                            <Col>
-                                <NavLink className={`header__link ${(navData) => navData.isActive ? "header__link--active" : ""}`} to="/">
-                                    Home
-                                </NavLink>
-                                <NavLink className={`header__link ${(navData) => navData.isActive ? "header__link--active" : ""}`} to="/recipes">
-                                    Recipes
-                                </NavLink>
-                                <NavLink className={`header__link ${(navData) => navData.isActive ? "header__link--active" : ""}`} to="/about">
-                                    About
-                                </NavLink>
-                            </Col>
-                        </Col>
-                        <Col xs="auto" className="">
-                            {currentUser ?
-                                <Dropdown>
-                                    <Dropdown.Toggle className="header__dropdown" variant='outline-warning' id="dropdown-basic" bsPrefix="null">
-                                        <i className="bi bi-person-circle" style={{ fontSize: '1.5rem' }}></i>
-                                    </Dropdown.Toggle>
-
-                                    <Dropdown.Menu>
-                                        <Dropdown.Item disabled>{currentUser?.email}</Dropdown.Item>
-                                        <Dropdown.Divider />
-                                        <Dropdown.Item href="/saved" className="header__save">Saved Recipes</Dropdown.Item>
-                                        <Dropdown.Item onClick={handleLogoutClick}>Log out</Dropdown.Item>
-                                    </Dropdown.Menu>
-                                </Dropdown>
-                                :
-                                <Button onClick={handleLoginClick} className="header__login" outline>Login</Button>
-                            }
-                        </Col>
-                    </Row>
-                </Container>
-            </header> */}
             <Navbar bg="white" expand="lg" className="header fixed-top">
                 <Container >
                     <Navbar.Brand as={Link} to="/">Maxim</Navbar.Brand>
@@ -83,8 +43,9 @@ export default function Header() {
                                 About
                             </Nav.Link>
                             {currentUser ?
-                                <NavDropdown title={currentUser?.email} id="navbarScrollingDropdown" className="d-lg-none">
+                                <NavDropdown title={currentUser?.email} id="navbarScrollingDropdown" className="d-lg-none" style={{ margin: 'auto 16px' }}>
                                     <NavDropdown.Item as={Link} to="/saved">Saved Recipes</NavDropdown.Item>
+                                    {(currentUser?.email === 'admin@admin.com') && <NavDropdown.Item as={Link} to="/dashboard">Dashboard</NavDropdown.Item>}
                                     <NavDropdown.Divider />
                                     <NavDropdown.Item onClick={handleLogoutClick}>Log out</NavDropdown.Item>
                                 </NavDropdown>
@@ -103,6 +64,7 @@ export default function Header() {
                                 <Dropdown.Item disabled>{currentUser?.email}</Dropdown.Item>
                                 <Dropdown.Divider />
                                 <Dropdown.Item as={Link} to="/saved" className="header__save">Saved Recipes</Dropdown.Item>
+                                {(currentUser?.email === 'admin@admin.com') && <NavDropdown.Item as={Link} to="/dashboard">Dashboard</NavDropdown.Item>}
                                 <Dropdown.Item onClick={handleLogoutClick}>Log out</Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>

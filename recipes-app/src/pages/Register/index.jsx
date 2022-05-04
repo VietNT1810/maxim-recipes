@@ -2,7 +2,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { Formik } from "formik";
 import React, { useState } from "react";
-import { Button, FloatingLabel, Form } from "react-bootstrap";
+import { Button, FloatingLabel, Form, Spinner } from "react-bootstrap";
 import { NavLink, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { auth, db } from "../../firebase";
@@ -72,7 +72,7 @@ export default function Login() {
                                     validate={handleValidate}
                                     onSubmit={handleSubmit}
                                 >
-                                    {({ errors, handleSubmit }) => (
+                                    {({ errors, handleSubmit, isSubmitting }) => (
                                         <Form onSubmit={handleSubmit} style={{ width: "23rem" }}>
                                             <h3 className="fw-normal mb-3 pb-3" style={{ letterSpacing: "1px" }}>Register</h3>
                                             <FloatingLabel
@@ -107,6 +107,7 @@ export default function Login() {
                                                 variant="primary btn-lg btn-block w-100"
                                                 type="submit"
                                             >
+                                                {isSubmitting && <Spinner animation="border" size="sm" />}
                                                 SIGN IN
                                             </Button>
                                             {/* <p className="small mb-5 pb-lg-2"><a className="text-muted" href="#!">Forgot password?</a></p> */}
