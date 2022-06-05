@@ -1,6 +1,6 @@
 import { collection, deleteDoc, doc, getDoc, getDocs, setDoc } from 'firebase/firestore'
 import React, { useEffect, useRef, useState } from 'react'
-import { Button, Col, Container, Row } from 'react-bootstrap'
+import { Col, Container, Row } from 'react-bootstrap'
 import { NavLink, useParams } from 'react-router-dom'
 import { RECIPES_DIFFICULTY_OPTIONS } from '../../../constants/global'
 import { db } from '../../../firebase'
@@ -100,7 +100,10 @@ export default function RecipeDetail() {
                     <img src={recipe.image.url} alt="" />
                   </div>
                   <div className="recipes__save">
-                    <Button onClick={handleSave}>{isSaved ? 'Saved' : 'Save'}</Button>
+                    <div className="recipes__save--button">
+                      <button onClick={handleSave}>{isSaved ? 'Saved' : 'Save'}</button>
+                      <NavLink to="/saved" className={`icon ${isSaved ? 'saved' : ''}`}><i className="bi bi-arrow-right"></i></NavLink>
+                    </div>
                     <div className={`recipes__save--modal ${modal ? 'active' : ''}`}>
                       <NavLink to='/login'>Log in</NavLink> or <NavLink to='/register'>Register</NavLink> to save your favorite recipes.
                       <span className="close" onClick={() => { setModal(false) }}>

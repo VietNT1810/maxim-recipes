@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import AddEdit from './AddEdit/AddEdit';
 import Sidebar from './Components/Sidebar/Sidebar';
 import Home from './Pages/Home';
@@ -11,6 +11,7 @@ function Dashboard() {
         <>
             <Sidebar />
             <Routes>
+                <Route path="/" element={<Navigate replace to="/dashboard/home" />} />
                 <Route path="home" element={<Home />} />
                 <Route path="users" element={<Users />} />
                 <Route path="products/list" element={<Products />} />
