@@ -46,7 +46,6 @@ export default function RecipeDetail() {
       const querySnapshot = await getDocs(savedCollection);
       querySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots
-        console.log(doc.id, " => ", doc.data());
         if (doc.id === recipeID) {
           setIsSaved(true);
         }
@@ -85,6 +84,53 @@ export default function RecipeDetail() {
       setModal(true);
     }
   }
+
+  const getNutritionPercentage = (nutrition) => { // get nutrition of an adult's reference intake
+    switch (nutrition) {
+      case "Calories":
+        return 2046;
+      case "Fat":
+        return 69;
+      case "Saturates":
+        return 19.5;
+      case "Sugars":
+        return 75;
+      case "Salt":
+        return 6.15;
+      case "Protein":
+        return 50.42;
+      case "Carbs":
+        return 249;
+      case "Fibre":
+        return null;
+      default:
+        return null;
+    }
+  }
+
+  const getNutrition = (nutrition) => {
+    let nutritionBox = [];
+
+    for (const item in nutrition) {
+      nutritionBox.push(
+        <li key={item}>
+          <div className="inner">
+            <span className="title">{item}</span>
+            <span className="top">{(item === 'calories') ? (nutrition[item]) : `${nutrition[item]}g`}</span>
+            <span className="divider"></span>
+            {getNutritionPercentage(item)
+              ?
+              <span className="bottom">{Math.floor((nutrition[item] / getNutritionPercentage(item)) * 100)}%</span>
+              :
+              <span className="bottom">-</span>
+            }
+          </div>
+        </li>
+      )
+    }
+
+    return nutritionBox;
+  };
 
   return (
     <div>
@@ -136,6 +182,17 @@ export default function RecipeDetail() {
                       </div>
                       <div className="difficulty">
                         <span>{handleSelectedOption(recipe.difficulty)}</span>
+                      </div>
+                    </div>
+                    <hr></hr>
+                    <div className="recipes__nutrition">
+                      <h6>NUTRITION PER SERVING</h6>
+                      <div className="nutrition-expanded">
+                        {
+                          <ul>
+                            {getNutrition(recipe.nutrition)}
+                          </ul>
+                        }
                       </div>
                     </div>
                     <hr></hr>
