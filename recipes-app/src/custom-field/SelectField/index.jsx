@@ -11,6 +11,8 @@ SelectField.propTypes = {
     placeholder: PropTypes.string,
     disabled: PropTypes.bool,
     options: PropTypes.array,
+    errors: PropTypes.string,
+    isInvalid: PropTypes.string,
 };
 
 SelectField.defaultProps = {
@@ -18,10 +20,12 @@ SelectField.defaultProps = {
     placeholder: '',
     disabled: false,
     options: [],
+    errors: '',
+    isInvalid: '',
 }
 
 function SelectField(props) {
-    const { field, form, label, placeholder, options } = props;
+    const { field, form, label, placeholder, options, errors, isInvalid } = props;
     const { name, value } = field;
 
     const selectedOption = options.find(option => option.value === value);
@@ -42,6 +46,7 @@ function SelectField(props) {
         <Form.Group className="mb-3">
             <Form.Label htmlFor={name}>{label}</Form.Label>
             <Select
+                className={isInvalid}
                 id={name}
                 {...field}
                 value={selectedOption}
@@ -50,6 +55,9 @@ function SelectField(props) {
                 placeholder={placeholder}
                 options={options}
             />
+            <Form.Text className="text-danger">
+                {errors}
+            </Form.Text>
         </Form.Group>
     );
 }
