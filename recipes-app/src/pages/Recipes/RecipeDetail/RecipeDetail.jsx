@@ -11,7 +11,7 @@ import './RecipeDetail.scss'
 
 export default function RecipeDetail() {
   const { recipeID } = useParams();
-  const [recipes, setRecipes] = useState([]);
+  const [recipes, setRecipes] = useState(null);
   const [recipe, setRecipe] = useState([]);
   const [isSaved, setIsSaved] = useState(false);
   const [modal, setModal] = useState(false);
@@ -52,7 +52,7 @@ export default function RecipeDetail() {
       });
     }
     if (currentUser) getSavedRecipes();
-  }, [currentUser])
+  }, [currentUser, recipeID]);
 
   const handleTextareaTransform = (value) => {
     return value.replace(/--/g, '').split('\n')
@@ -85,7 +85,7 @@ export default function RecipeDetail() {
     }
   }
 
-  const getNutritionPercentage = (nutrition) => { // get nutrition of an adult's reference intake
+  const getNutritionIntake = (nutrition) => { // get nutrition of an adult's reference intake
     switch (nutrition) {
       case "Calories":
         return 2046;
@@ -118,9 +118,9 @@ export default function RecipeDetail() {
             <span className="title">{item}</span>
             <span className="top">{(item === 'calories') ? (nutrition[item]) : `${nutrition[item]}g`}</span>
             <span className="divider"></span>
-            {getNutritionPercentage(item)
+            {getNutritionIntake(item)
               ?
-              <span className="bottom">{Math.floor((nutrition[item] / getNutritionPercentage(item)) * 100)}%</span>
+              <span className="bottom">{Math.floor((nutrition[item] / getNutritionIntake(item)) * 100)}%</span>
               :
               <span className="bottom">-</span>
             }
@@ -139,7 +139,7 @@ export default function RecipeDetail() {
       <div className="recipes my-4">
         <Container>
           {
-            recipes.map((recipe, index) => (
+            recipes?.map((recipe, index) => (
               <Row className="justify-content-center" key={index}>
                 <Col xs="4">
                   <div className="recipes__image">

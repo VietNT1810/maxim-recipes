@@ -52,8 +52,8 @@ export default function Home() {
             <div className="title features__title">
               <h3>SPECIAL FEATURES</h3>
             </div>
-            <Row>
-              <Col xs="4">
+            <Row className="d-flex flex-wrap">
+              <Col md="4">
                 <div className="features__inner">
                   <span>
                     <svg xmlns="http://www.w3.org/2000/svg" width={40} height={40} fill="currentColor" className="bi bi-list-ul" viewBox="0 0 16 16">
@@ -63,7 +63,7 @@ export default function Home() {
                   <h4>COOKING METHOD</h4>
                 </div>
               </Col>
-              <Col xs="4">
+              <Col md="4">
                 <div className="features__inner">
                   <span>
                     <svg xmlns="http://www.w3.org/2000/svg" width={40} height={40} fill="currentColor" className="bi bi-clock" viewBox="0 0 16 16">
@@ -74,7 +74,7 @@ export default function Home() {
                   <h4>COOKING PERIOD</h4>
                 </div>
               </Col>
-              <Col xs="4">
+              <Col md="4">
                 <div className="features__inner">
                   <span>
                     <svg xmlns="http://www.w3.org/2000/svg" width={40} height={40} fill="currentColor" className="bi bi-bookmark-star" viewBox="0 0 16 16">
