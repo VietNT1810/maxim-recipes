@@ -17,39 +17,32 @@ TextareaField.defaultProps = {
     disabled: false
 }
 
-const handleValue = (value) => {
-    return value.replace(/--/g, '').split('\n');
-}
-
 function TextareaField(props) {
     const {
-        field, form,
-        type, label, placeholder, disabled
+        field,
+        type, label, placeholder, disabled, errors, isInvalid,
     } = props;
+
     const { name } = field;
-
-    const handleChange = (e) => {
-        field.onChange(e)
-    }
-
-
     return (
         <Form.Group className="mb-3">
             <Form.Label htmlFor={name}>{label}</Form.Label>
             <Form.Control
-                id={name}
                 as="textarea"
-
+                id={name}
+                className={isInvalid}
                 // value={value}
                 // onChange={onChange}  == {...field}
                 // onBlur={onBlur}
                 {...field}
 
-                onChange={(e) => handleChange(e)}
-
+                type={type}
                 placeholder={placeholder}
                 disabled={disabled}
             />
+            <Form.Text className="text-danger">
+                {errors}
+            </Form.Text>
         </Form.Group>
     );
 }

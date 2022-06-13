@@ -27,7 +27,7 @@ export default function RecipesCard({ recipes, loading }) {
                     </>
                     :
                     recipes.map((card) => (
-                        <Col className="col-3" key={card.id} >
+                        <Col xs="6" md="3" key={card.id} >
                             <NavLink to={`/recipes/detail/${card.id}`} className="recipes__card">
                                 <div className="card" style={{ width: "100%", height: "100%" }}>
                                     {console.log(card.image.url)}
