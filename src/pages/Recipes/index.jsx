@@ -16,7 +16,7 @@ export default function Recipes() {
 
     useEffect(() => {
         const getData = async () => {
-            const queryRecipes = query(recipesCollection, limit(12));
+            const queryRecipes = await query(recipesCollection, limit(12));
             // const queryData = await getDocs(queryRecipes)
             //     .then(() => {
             //         updateState(queryData);
@@ -33,6 +33,7 @@ export default function Recipes() {
             }
         }
         getData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const updateState = (data) => {
