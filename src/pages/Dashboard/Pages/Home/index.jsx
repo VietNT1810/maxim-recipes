@@ -1,5 +1,5 @@
 import React from 'react'
-import { Col, Container, Row } from 'react-bootstrap'
+import { Container, Row } from 'react-bootstrap'
 
 export default function Home() {
     return (
@@ -10,7 +10,7 @@ export default function Home() {
                         <h1 className="text-center my-4">Welcome to Maxim's admin dashboard</h1>
                     </Row>
                     <Row className="justify-content-center">
-                        <img src={require("../../../../assets/images/admin.jpg")} style={{ width: '800px' }} />
+                        <img src={require("../../../../assets/images/admin.jpg")} style={{ width: '800px' }} alt='' />
                     </Row>
                 </Container>
             </div>

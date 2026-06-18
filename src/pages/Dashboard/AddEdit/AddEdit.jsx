@@ -1,11 +1,11 @@
-import { addDoc, collection, doc, getDoc, updateDoc } from 'firebase/firestore';
+import { doc, getDoc } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { FastField, Formik } from 'formik';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect,  useState } from 'react';
 import { Button, Col, Container, Form, Row, Spinner } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
-import Select from 'react-select';
-import Swal from 'sweetalert2';
+// import Select from 'react-select';
+// import Swal from 'sweetalert2';
 import { v4 } from 'uuid';
 import { RECIPES_DIFFICULTY_OPTIONS } from '../../../constants/global';
 import InputField from '../../../custom-field/InputField';
@@ -18,11 +18,11 @@ import './AddEdit.scss'
 
 export default function AddEdit() {
     const [form, setForm] = useState({})
-    const [imageInfo, setImageInfo] = useState({});
-    const prevImageInfo = useRef(imageInfo);
+    // const [imageInfo, setImageInfo] = useState({});
+    // const prevImageInfo = useRef(imageInfo);
     const { recipeID } = useParams();
-    const [create, setCreate] = useState(!recipeID);
-    const recipesCollectionRef = collection(db, "recipes");
+    const [create] = useState(!recipeID);
+    // const recipesCollectionRef = collection(db, "recipes");
 
     // const selectedOption = RECIPES_DIFFICULTY_OPTIONS.find(option => option.value === form.difficulty);
 
@@ -57,41 +57,41 @@ export default function AddEdit() {
         }
     }, [recipeID])
 
-    const handleValidate = (values) => {
-        const error = {};
+    // const handleValidate = (values) => {
+    //     const error = {};
 
-        if (!values.title) {
-            error.title = "This field is required";
-        }
+    //     if (!values.title) {
+    //         error.title = "This field is required";
+    //     }
 
-        if (!values.description) {
-            error.description = "This field is required";
-        }
+    //     if (!values.description) {
+    //         error.description = "This field is required";
+    //     }
 
-        if (!values.serves) {
-            error.serves = 'This field is required';
-        } else if (isNaN(values.serves)) {
-            error.serves = 'Invalid number';
-        }
+    //     if (!values.serves) {
+    //         error.serves = 'This field is required';
+    //     } else if (isNaN(values.serves)) {
+    //         error.serves = 'Invalid number';
+    //     }
 
-        if (!values.times) {
-            error.times = "This field is required";
-        }
+    //     if (!values.times) {
+    //         error.times = "This field is required";
+    //     }
 
-        if (!values.difficulty) {
-            error.difficulty = "This field is required";
-        }
+    //     if (!values.difficulty) {
+    //         error.difficulty = "This field is required";
+    //     }
 
-        if (!values.ingredients) {
-            error.ingredients = "This field is required";
-        }
+    //     if (!values.ingredients) {
+    //         error.ingredients = "This field is required";
+    //     }
 
-        if (!values.method) {
-            error.method = "This field is required";
-        }
+    //     if (!values.method) {
+    //         error.method = "This field is required";
+    //     }
 
-        return error;
-    }
+    //     return error;
+    // }
 
     // const handleInputChange = (e) => {
     //     setForm({ ...form, [e.target.name]: e.target.value });
@@ -123,10 +123,10 @@ export default function AddEdit() {
         const imageRef = ref(storage, `images/${fileName}`);
         await uploadBytes(imageRef, file);
         await getDownloadURL(imageRef).then((url) => {
-            setImageInfo({
-                name: imageRef.name,
-                url: url
-            })
+            // setImageInfo({
+            //     name: imageRef.name,
+            //     url: url
+            // })
         })
     }
 

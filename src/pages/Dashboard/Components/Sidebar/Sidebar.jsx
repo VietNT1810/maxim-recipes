@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
-import { Button, Col } from 'react-bootstrap'
+import React from 'react'
+import { Col } from 'react-bootstrap'
 import { NavLink } from 'react-router-dom'
 import "./Sidebar.scss"
 
 export default function Sidebar() {
-    const [active, setActive] = useState(true);
+    // const [active, setActive] = useState(true);
 
     return (
         <>
@@ -50,7 +50,7 @@ export default function Sidebar() {
                     </ul>
                     <hr></hr>
                     <div className="dropdown">
-                        <a href="#" className="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a href="/" className="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                             <strong>admin1</strong>
                         </a>
                         <ul className="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1" >
