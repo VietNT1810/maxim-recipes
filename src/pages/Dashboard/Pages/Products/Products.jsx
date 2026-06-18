@@ -12,9 +12,8 @@ export default function Products() {
     const [update, setUpdate] = useState(0); //Force update
     const navigate = useNavigate();
 
-    const recipesCollectionRef = collection(db, "recipes")
-
     useEffect(() => {
+        const recipesCollectionRef = collection(db, "recipes")
         const getRecipes = async () => {
             const data = await getDocs(recipesCollectionRef);
             setCards(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));

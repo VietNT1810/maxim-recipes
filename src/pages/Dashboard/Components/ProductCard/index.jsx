@@ -1,76 +1,95 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import { Button, Col, Row } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import PropTypes from "prop-types";
+import { Button, Col, Row } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 ProductCard.propTypes = {
-    cards: PropTypes.array,
-    onEdit: PropTypes.func,
-    onDelete: PropTypes.func
+  cards: PropTypes.array,
+  onEdit: PropTypes.func,
+  onDelete: PropTypes.func,
 };
 
 ProductCard.defaultProps = {
-    cards: [],
-    onEdit: null,
-    onDelete: null
-}
+  cards: [],
+  onEdit: null,
+  onDelete: null,
+};
 
 function ProductCard(props) {
-    const { cards, onDelete, onEdit } = props;
+  const { cards, onDelete, onEdit } = props;
 
-    const handleDeleteClick = (name, id) => {
-        if (onDelete) {
-            onDelete(name, id)
-        }
+  const handleDeleteClick = (name, id) => {
+    if (onDelete) {
+      onDelete(name, id);
     }
+  };
 
-    const handleEditClick = (id) => {
-        if (!onEdit) return;
-        onEdit(id)
-    }
+  const handleEditClick = (id) => {
+    if (!onEdit) return;
+    onEdit(id);
+  };
 
-    const handleTextareaTransform = (value) => {
-        return value.replace(/--/g, '').split('\n')
-    }
+//   const handleTextareaTransform = (value) => {
+//     return value.replace(/--/g, "").split("\n");
+//   };
 
-    return (
-        <Col style={{ margin: '1rem auto' }}>
-            <Row className="justify-content-between">
-                <Col xs="auto"><h1>Products</h1></Col>
-                <Col xs="auto" className="d-flex align-items-center">
-                    <Button as={Link} to="/dashboard/products/create" variant="success">Add</Button>
-                </Col>
-            </Row>
-            <Row className="gy-5">
-                {
-                    cards.map((card) => (
-                        <Col className="col-2" key={card.id}>
-                            <div className="card" style={{ width: "100%", height: "100%" }}>
-                                <img src={card.image.url} className="card-img-top" alt="Error getting image" />
-                                <div className="card-body d-flex flex-column">
-                                    <div className="recipes__time">
-                                        <span>
-                                            <i className="bi bi-clock"></i>
-                                            {card.times}
-                                        </span>
-                                    </div>
-                                    <h6 className="recipes__title">{card.title}</h6>
-                                    <Row className="mt-auto">
-                                        <Col>
-                                            <Button variant="outline-secondary" className="w-100" onClick={() => handleEditClick(card.id)} >Edit</Button>
-                                        </Col>
-                                        <Col>
-                                            <Button variant="outline-danger" className="w-100" onClick={() => handleDeleteClick(card.image.name, card.id)}>Delete</Button>
-                                        </Col>
-                                    </Row>
-                                </div>
-                            </div>
-                        </Col >
-                    ))
-                }
-            </Row>
+  return (
+    <Col style={{ margin: "1rem auto" }}>
+      <Row className="justify-content-between">
+        <Col xs="auto">
+          <h1>Products</h1>
         </Col>
-    );
+        <Col xs="auto" className="d-flex align-items-center">
+          <Button as={Link} to="/dashboard/products/create" variant="success">
+            Add
+          </Button>
+        </Col>
+      </Row>
+      <Row className="gy-5">
+        {cards.map((card) => (
+          <Col className="col-2" key={card.id}>
+            <div className="card" style={{ width: "100%", height: "100%" }}>
+              <img
+                src={card.image.url}
+                className="card-img-top"
+                alt="Error getting"
+              />
+              <div className="card-body d-flex flex-column">
+                <div className="recipes__time">
+                  <span>
+                    <i className="bi bi-clock"></i>
+                    {card.times}
+                  </span>
+                </div>
+                <h6 className="recipes__title">{card.title}</h6>
+                <Row className="mt-auto">
+                  <Col>
+                    <Button
+                      variant="outline-secondary"
+                      className="w-100"
+                      onClick={() => handleEditClick(card.id)}
+                    >
+                      Edit
+                    </Button>
+                  </Col>
+                  <Col>
+                    <Button
+                      variant="outline-danger"
+                      className="w-100"
+                      onClick={() =>
+                        handleDeleteClick(card.image.name, card.id)
+                      }
+                    >
+                      Delete
+                    </Button>
+                  </Col>
+                </Row>
+              </div>
+            </div>
+          </Col>
+        ))}
+      </Row>
+    </Col>
+  );
 }
 
 export default ProductCard;
