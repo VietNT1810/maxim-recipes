@@ -4,6 +4,7 @@ import 'react-loading-skeleton/dist/skeleton.css'
 import { NavLink } from 'react-router-dom';
 import "./RecipesCard.scss";
 import SkeletonCard from '../../components/Skeletons/SkeletonCard';
+import RecipeImage from '../../components/RecipeImage/RecipeImage';
 
 export default function RecipesCard({ recipes, loading }) {
     // useEffect(() => {
@@ -29,8 +30,9 @@ export default function RecipesCard({ recipes, loading }) {
                         <Col xs="6" md="3" key={card.id} >
                             <NavLink to={`/recipes/detail/${card.id}`} className="recipes__card">
                                 <div className="card" style={{ width: "100%", height: "100%" }}>
-                                    {console.log(card.image.url)}
-                                    <img src={card.image.url} className="card-img-top" alt="..." width="100%" />
+                                    <div className='card-img-container' >
+                                        <RecipeImage src={card.image.url} className="card-img-top" alt={card.title} width="100%" />
+                                    </div>
                                     <div className="card-body">
                                         <div className="recipes__time">
                                             <span>

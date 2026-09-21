@@ -7,6 +7,7 @@ import { db } from '../../../firebase'
 import { useAuth } from '../../../hooks/useAuth'
 import Footer from '../../components/Footer/Footer'
 import Header from '../../components/Header/Header'
+import RecipeImage from '../../components/RecipeImage/RecipeImage'
 import './RecipeDetail.scss'
 
 export default function RecipeDetail() {
@@ -143,7 +144,7 @@ export default function RecipeDetail() {
               <Row className="justify-content-center" key={index}>
                 <Col xs="4">
                   <div className="recipes__image">
-                    <img src={recipe.image.url} alt="" />
+                    <RecipeImage src={recipe.image.url} alt={recipe.title} />
                   </div>
                   <div className="recipes__save">
                     <div className="recipes__save--button">
